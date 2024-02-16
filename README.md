@@ -1,6 +1,8 @@
 # sample_movies_app_flutter
 
-A new Flutter project.
+Flutter app to display a list of movies and their details.
+Built using the BLoC pattern and the TMDB API.
+
 
 ## Getting Started
 
