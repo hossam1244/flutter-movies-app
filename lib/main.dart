@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sample_movies_app_flutter/view/movies_list_page.dart';
+import 'package:sample_movies_app_flutter/service_locator.dart' as di;
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -14,10 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black26),
         useMaterial3: true,
       ),
-      home: Container(),
+      home:  Container(),
     );
   }
 }
