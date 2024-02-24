@@ -3,13 +3,13 @@ import '../models/movie_model.dart';
 import 'movies_remote_data_source.dart';
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
-  final Dio _dio;
+  final Dio dio;
 
-  MoviesRemoteDataSourceImpl(this._dio);
+  MoviesRemoteDataSourceImpl({required this.dio});
 
   @override
   Future<List<MovieModel>> getMovies() async {
-    final response = await _dio.get('movies');
+    final response = await dio.get('movies');
     if (response.statusCode == 200) {
       final List<MovieModel> movies = (response.data as List)
           .map((movie) => MovieModel.fromJson(movie))

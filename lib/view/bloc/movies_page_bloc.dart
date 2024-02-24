@@ -7,15 +7,16 @@ import '../../domain/usecase/movies_use_cases.dart';
 class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
   MoviesUseCases _moviesUseCases;
 
-  MoviesPageBloc({required MoviesUseCases moviesUseCases}) :
-        _moviesUseCases = moviesUseCases,
+  MoviesPageBloc({required MoviesUseCases moviesUseCases})
+      : _moviesUseCases = moviesUseCases,
         super(const MoviesPageState()) {
     on<FetchEvent>(_onFetchMovies);
   }
-  
 
-
-  void _onFetchMovies(FetchEvent event, Emitter<MoviesPageState> emit) {
-
+  Future<void> _onFetchMovies(FetchEvent event, Emitter<MoviesPageState> emit) async {
+    emit(const MoviesPageState(status: MoviesPageStatus.loading));
+    await Future.delayed(const Duration(seconds: 5), () async {
+      emit(const MoviesPageState(status: MoviesPageStatus.success, movies: []));
+    });
   }
 }
