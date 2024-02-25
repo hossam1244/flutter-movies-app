@@ -49,8 +49,23 @@ class _MoviesListPageState extends State<MoviesListPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state.status == MoviesPageStatus.success) {
-                return const Center(
-                  child: Text("success...", style: TextStyle(fontSize: 24,color: Colors.black)),
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.movies.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ListTile(
+                        title: Text(state.movies[index].title),
+                        leading: Image.network(
+                          state.movies[index].poster ?? "",
+                          width: 100,
+                          height: 100,
+                        ),
+                        trailing: const Icon(Icons.star),
+                      ),
+                    );
+                  },
                 );
               } else if (state.status == MoviesPageStatus.failure) {
                 return const Center(

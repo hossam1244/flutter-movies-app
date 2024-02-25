@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
 import 'package:sample_movies_app_flutter/view/bloc/movies_page_event.dart';
 import 'package:sample_movies_app_flutter/view/bloc/movies_page_state.dart';
 
@@ -15,8 +16,8 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
 
   Future<void> _onFetchMovies(FetchEvent event, Emitter<MoviesPageState> emit) async {
     emit(const MoviesPageState(status: MoviesPageStatus.loading));
-    await Future.delayed(const Duration(seconds: 5), () async {
-      emit(const MoviesPageState(status: MoviesPageStatus.success, movies: []));
-    });
+    List<MovieEntity> moviesEntitiesList = await _moviesUseCases.getMovies();
+    print(moviesEntitiesList.length);
+    emit(MoviesPageState(status: MoviesPageStatus.success, movies: moviesEntitiesList));
   }
 }

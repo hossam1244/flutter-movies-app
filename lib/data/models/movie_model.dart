@@ -1,11 +1,15 @@
-class MovieModel {
-  String? title;
-  String? poster;
+import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
 
-  MovieModel({this.title, this.poster});
+class MovieModel extends MovieEntity {
+  const MovieModel({
+    required String title,
+    required String poster,
+  }) : super(title: title, poster: poster);
 
-  MovieModel.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    poster = json['poster'];
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+      title: json['title'],
+      poster: json['poster'],
+    );
   }
 }

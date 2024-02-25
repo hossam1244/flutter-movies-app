@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/movie_model.dart';
+import '../../domain/entity/movie_entity.dart';
 
 enum MoviesPageStatus { initial, loading, success, failure }
 
@@ -13,13 +14,13 @@ class MoviesPageState extends Equatable {
   });
 
   final MoviesPageStatus status;
-  final List<MovieModel> movies;
+  final List<MovieEntity> movies;
   final bool hasReachedEnd;
   final int currentPage;
 
   MoviesPageState copyWith({
     MoviesPageStatus? status,
-    List<MovieModel>? movies,
+    List<MovieEntity>? movies,
     bool? hasReachedEnd,
     int? currentPage,
   }) {
