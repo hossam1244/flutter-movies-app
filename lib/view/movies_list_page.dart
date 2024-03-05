@@ -38,45 +38,41 @@ class _MoviesListPageState extends State<MoviesListPage> {
   BlocProvider<MoviesPageBloc> buildBody(BuildContext context) {
     return BlocProvider(
       create: (_) => _moviesPageBloc,
-      child: Column(
-        children: [
-          BlocBuilder<MoviesPageBloc, MoviesPageState>(
-            builder: (context, state) {
-              if (state.status == MoviesPageStatus.initial) {
-                return Container();
-              } else if (state.status == MoviesPageStatus.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+      child: BlocBuilder<MoviesPageBloc, MoviesPageState>(
+        builder: (context, state) {
+          if (state.status == MoviesPageStatus.initial) {
+            return Container();
+          } else if (state.status == MoviesPageStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state.status == MoviesPageStatus.success) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.movies?.results?.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    title: Text(state.movies?.results?[index].name ?? ""),
+                    leading: Image.network(
+                      "https://image.tmdb.org/t/p/w500${state.movies?.results?[index].posterPath ?? ""}",
+                      width: 100,
+                      height: 100,
+                    ),
+                    trailing: const Icon(Icons.star),
+                  ),
                 );
-              } else if (state.status == MoviesPageStatus.success) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.movies.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ListTile(
-                        title: Text(state.movies[index].title),
-                        leading: Image.network(
-                          state.movies[index].poster ?? "",
-                          width: 100,
-                          height: 100,
-                        ),
-                        trailing: const Icon(Icons.star),
-                      ),
-                    );
-                  },
-                );
-              } else if (state.status == MoviesPageStatus.failure) {
-                return const Center(
-                  child: Text("error..."),
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-        ],
+              },
+            );
+          } else if (state.status == MoviesPageStatus.failure) {
+            return const Center(
+              child: Text("error..."),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

@@ -10,8 +10,8 @@ class MoviesUseCases {
 
   final MoviesRepository _repository;
 
-  Future<List<MovieEntity>> getMovies() async {
-    final list = await _repository.getMovies();
-    return list;
+  Future<MovieEntity> getMovies() async {
+    final movies = await _repository.getMovies();
+    return movies;
   }
 }

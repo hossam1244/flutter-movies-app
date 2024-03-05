@@ -14,10 +14,11 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
     on<FetchEvent>(_onFetchMovies);
   }
 
-  Future<void> _onFetchMovies(FetchEvent event, Emitter<MoviesPageState> emit) async {
+  Future<void> _onFetchMovies(
+      FetchEvent event, Emitter<MoviesPageState> emit) async {
     emit(const MoviesPageState(status: MoviesPageStatus.loading));
-    List<MovieEntity> moviesEntitiesList = await _moviesUseCases.getMovies();
-    print(moviesEntitiesList.length);
-    emit(MoviesPageState(status: MoviesPageStatus.success, movies: moviesEntitiesList));
+    MovieEntity movies = await _moviesUseCases.getMovies();
+    print(movies.results?.length);
+    emit(MoviesPageState(status: MoviesPageStatus.success, movies: movies));
   }
 }

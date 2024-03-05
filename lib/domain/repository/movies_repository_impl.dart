@@ -20,9 +20,9 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
 
   @override
-  Future<List<MovieEntity>> getMovies() async {
+  Future<MovieEntity> getMovies() async {
     // TODO: implement getMovies
-    List<MovieEntity> movies = await _moviesRemoteDataSource.getMovies();
+    MovieEntity movies = await _moviesRemoteDataSource.getMovies();
     return Future.value(movies);
   }
 }

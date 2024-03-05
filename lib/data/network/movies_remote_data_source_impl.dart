@@ -12,7 +12,7 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   MoviesRemoteDataSourceImpl({required this.dio});
 
   @override
-  Future<List<MovieEntity>> getMovies() async {
+  Future<MovieEntity> getMovies() async {
     final response = await dio.get(
         'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc',
         options: Options(headers: {
@@ -21,10 +21,8 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
         }));
 
     if (response.statusCode == 200) {
-      final List<MovieEntity> movies = (response.data as List)
-          .map((movie) => MovieModel.fromJson(movie))
-          .toList();
-      return movies;
+      MovieEntity movieEntity =  MovieEntity.fromJson(response.data);
+      return movieEntity;
     } else {
       throw Exception('Failed to load movies');
     }
