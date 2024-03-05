@@ -13,21 +13,20 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
 
   @override
   Future<List<MovieEntity>> getMovies() async {
-    // final response = await dio.get('movies');
-    String response = await rootBundle.loadString('assets/movies.json');
-    final jsonResult = jsonDecode(response); //latest Dart
-    final List<MovieEntity> movies = (jsonResult as List)
-        .map((movie) => MovieModel.fromJson(movie))
-        .toList();
-    return movies;
+    final response = await dio.get(
+        'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc',
+        options: Options(headers: {
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTQyM2VkZTMxYzIwNWNkMWY2NzE0NWRmNGM1ZjM1NiIsInN1YiI6IjY1ZTc2OGJhMzFkMDliMDE2MmUzMTg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U6Kmf_AsNdX4K4QjQcsnXIemeWqOWdalYGcs1ljmelY"
+        }));
 
-    // if (response.statusCode == 200) {
-    //   final List<MovieEntity> movies = (response.data as List)
-    //       .map((movie) => MovieModel.fromJson(movie))
-    //       .toList();
-    //   return movies;
-    // } else {
-    //   throw Exception('Failed to load movies');
-    // }
+    if (response.statusCode == 200) {
+      final List<MovieEntity> movies = (response.data as List)
+          .map((movie) => MovieModel.fromJson(movie))
+          .toList();
+      return movies;
+    } else {
+      throw Exception('Failed to load movies');
+    }
   }
 }
