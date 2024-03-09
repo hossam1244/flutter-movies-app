@@ -1,9 +1,18 @@
 import 'package:equatable/equatable.dart';
 
+import 'package:hive/hive.dart';
+
+part 'movie_entity.g.dart';
+
+@HiveType(typeId: 1)
 class MovieEntity extends Equatable {
+  @HiveField(0)
   int? page;
+  @HiveField(1)
   List<Results>? results;
+  @HiveField(2)
   int? totalPages;
+  @HiveField(3)
   int? totalResults;
 
   MovieEntity({this.page, this.results, this.totalPages, this.totalResults});
