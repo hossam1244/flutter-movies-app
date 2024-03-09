@@ -4,10 +4,15 @@ import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
 import 'package:sample_movies_app_flutter/view/movies_list_page.dart';
 import 'package:sample_movies_app_flutter/service_locator.dart' as di;
 
+import 'domain/entity/movie_results_entity.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(MovieEntityAdapter());
+  Hive.registerAdapter(ResultsAdapter());
+  // Opening the box
+  await Hive.openBox<MovieEntity>('moviesBox');
   await di.init();
   runApp(const MyApp());
 }
