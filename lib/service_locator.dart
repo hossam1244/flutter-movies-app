@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:sample_movies_app_flutter/data/local/MoviesLocalStorage.dart';
 import 'package:sample_movies_app_flutter/data/network/movies_remote_data_source.dart';
 import 'package:sample_movies_app_flutter/data/network/movies_remote_data_source_impl.dart';
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository.dart';
@@ -64,6 +65,7 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton<MoviesRepository>(
     () => MoviesRepositoryImpl(
       networkInfo: serviceLocator(),
+      moviesLocalDataStorage: serviceLocator(),
       moviesRemoteDataSource: serviceLocator(),
     ),
   );
@@ -73,6 +75,9 @@ Future<void> init() async {
     () => MoviesRemoteDataSourceImpl(dio: serviceLocator()),
   );
 
+  serviceLocator.registerLazySingleton<MoviesLocalDataStorage>(
+    () => MoviesLocalDataStorage(),
+  );
   //! Core
   serviceLocator.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(serviceLocator()),
