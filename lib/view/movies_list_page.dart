@@ -18,11 +18,15 @@ class _MoviesListPageState extends State<MoviesListPage> {
 
   @override
   void initState() {
+    _initBloc();
     super.initState();
   }
 
   void _initBloc() {
     _moviesPageBloc = serviceLocator<MoviesPageBloc>();
+  }
+
+  void _fetchMovies() {
     _moviesPageBloc.add(const FetchEvent());
   }
 
@@ -42,7 +46,7 @@ class _MoviesListPageState extends State<MoviesListPage> {
       child: BlocBuilder<MoviesPageBloc, MoviesPageState>(
         builder: (context, state) {
           if (state.status == MoviesPageStatus.initial) {
-            _initBloc();
+            _fetchMovies();
             return Container();
           } else if (state.status == MoviesPageStatus.loading) {
             return const Center(
