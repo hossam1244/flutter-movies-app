@@ -14,15 +14,16 @@ class MoviesListPage extends StatefulWidget {
 }
 
 class _MoviesListPageState extends State<MoviesListPage> {
-
   late MoviesPageBloc _moviesPageBloc;
-
 
   @override
   void initState() {
+    super.initState();
+  }
+
+  void _initBloc() {
     _moviesPageBloc = serviceLocator<MoviesPageBloc>();
     _moviesPageBloc.add(const FetchEvent());
-    super.initState();
   }
 
   @override
@@ -41,6 +42,7 @@ class _MoviesListPageState extends State<MoviesListPage> {
       child: BlocBuilder<MoviesPageBloc, MoviesPageState>(
         builder: (context, state) {
           if (state.status == MoviesPageStatus.initial) {
+            _initBloc();
             return Container();
           } else if (state.status == MoviesPageStatus.loading) {
             return const Center(
