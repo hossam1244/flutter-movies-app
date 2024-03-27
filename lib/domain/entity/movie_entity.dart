@@ -31,17 +31,6 @@ class MovieEntity extends HiveObject {
     totalResults = json['total_results'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
-    }
-    data['total_pages'] = this.totalPages;
-    data['total_results'] = this.totalResults;
-    return data;
-  }
-
   @override
   List<Object?> get props => [page, results, totalPages, totalResults];
 }
