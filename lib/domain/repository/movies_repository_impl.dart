@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:hive/hive.dart';
-import 'package:sample_movies_app_flutter/data/models/movie_model.dart';
 import 'package:sample_movies_app_flutter/data/network/movies_remote_data_source.dart';
 import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository.dart';

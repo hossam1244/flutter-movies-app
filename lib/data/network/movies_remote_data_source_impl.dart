@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import '../../domain/entity/movie_entity.dart';
-import '../models/movie_model.dart';
 import 'movies_remote_data_source.dart';
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
