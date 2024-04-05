@@ -1,11 +1,6 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:mockito/mockito.dart';
 import 'package:sample_movies_app_flutter/core/network_info.dart';
-
-
-
 
 void main() {
   NetworkInfoImpl? networkInfoImpl;
