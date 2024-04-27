@@ -7,7 +7,7 @@ import 'package:sample_movies_app_flutter/data/network/movies_remote_data_source
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository.dart';
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository_impl.dart';
 import 'package:sample_movies_app_flutter/domain/usecase/movies_use_cases.dart';
-import 'package:sample_movies_app_flutter/view/bloc/movies_page_bloc.dart';
+import 'package:sample_movies_app_flutter/view/movies_list/bloc/movies_page_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network_info.dart';

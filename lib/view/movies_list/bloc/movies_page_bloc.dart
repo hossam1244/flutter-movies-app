@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
-import 'package:sample_movies_app_flutter/view/bloc/movies_page_event.dart';
-import 'package:sample_movies_app_flutter/view/bloc/movies_page_state.dart';
 
-import '../../domain/usecase/movies_use_cases.dart';
+import '../../../domain/usecase/movies_use_cases.dart';
+import 'movies_page_event.dart';
+import 'movies_page_state.dart';
+
 
 class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
   MoviesUseCases _moviesUseCases;

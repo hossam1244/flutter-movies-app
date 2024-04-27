@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/entity/movie_entity.dart';
+
+import '../../../domain/entity/movie_entity.dart';
 
 enum MoviesPageStatus { initial, loading, success, failure }
 
