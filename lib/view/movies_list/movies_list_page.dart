@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sample_movies_app_flutter/domain/entity/movie_results_entity.dart';
 import 'package:sample_movies_app_flutter/service_locator.dart';
 
 import 'bloc/movies_page_bloc.dart';
 import 'bloc/movies_page_event.dart';
 import 'bloc/movies_page_state.dart';
-
 
 class MoviesListPage extends StatefulWidget {
   const MoviesListPage({super.key});
@@ -61,8 +61,9 @@ class _MoviesListPageState extends State<MoviesListPage> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    context.go('/movie_details');
-                  },  
+                    Results? movieDetails = state.movies?.results?[index];
+                    context.go('/movie_details', extra: movieDetails);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ListTile(

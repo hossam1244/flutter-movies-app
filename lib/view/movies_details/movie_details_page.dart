@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/entity/movie_results_entity.dart';
+
 class MoviesDetailsPage extends StatelessWidget {
-  const MoviesDetailsPage({super.key});
+  final Results? movieDetails;
+
+  const MoviesDetailsPage({super.key, required this.movieDetails});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movie Details'),
+        title: Text(movieDetails?.name ?? 'Movie Details'),
       ),
-      body:  Center(
-        child: _movieDetails(),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _movieDetails(),
+        ),
       ),
     );
   }
@@ -18,15 +25,19 @@ class MoviesDetailsPage extends StatelessWidget {
   Widget _movieDetails() {
     return Column(
       children: [
-        Image.network(""),
+        Image.network(
+          "https://image.tmdb.org/t/p/w500${movieDetails?.posterPath ?? ""}",
+          width: 200,
+          height: 200,
+        ),
         const SizedBox(height: 10),
-        Text('Movie Name'),
+        Text(movieDetails?.name ?? 'Movie Name'),
         const SizedBox(height: 10),
-        Text('Movie Description'),
+        Text(movieDetails?.overview ?? 'Movie Overview'),
         const SizedBox(height: 10),
-        Text('Movie Rating'),
+        Text('Movie Rating: ${movieDetails?.voteAverage}'),
         const SizedBox(height: 10),
-        Text('Movie Release Date'),
+        Text('Release Date: ${movieDetails?.firstAirDate}'),
       ],
     );
   }
