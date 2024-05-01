@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_list/movies_list_page.dart';
 
-import 'domain/entity/movie_entity.dart';
 import 'domain/entity/movie_results_entity.dart';
 
 /// The route configuration.
