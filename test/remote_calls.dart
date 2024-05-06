@@ -10,29 +10,29 @@ import 'package:sample_movies_app_flutter/domain/repository/movies_repository_im
 import 'package:sample_movies_app_flutter/domain/usecase/movies_use_cases.dart';
 
 void main() {
-  MoviesUseCases? _moviesUseCases;
-  MoviesRepositoryImpl _moviesRepositoryImpl;
-  MoviesRemoteDataSourceImpl _moviesRemoteDataSourceImpl;
-  MoviesLocalDataSource _moviesLocalDataStorage;
-  NetworkInfo _networkInfo;
-  InternetConnectionChecker _internetConnectionChecker;
-  Dio _dio;
+  MoviesUseCases? moviesUseCases;
+  MoviesRepositoryImpl moviesRepositoryImpl;
+  MoviesRemoteDataSourceImpl moviesRemoteDataSourceImpl;
+  MoviesLocalDataSource moviesLocalDataStorage;
+  NetworkInfo networkInfo;
+  InternetConnectionChecker internetConnectionChecker;
+  Dio dio;
 
   setUp(() {
-    _dio = Dio();
-    _internetConnectionChecker = InternetConnectionChecker();
-    _moviesLocalDataStorage = MoviesLocalStorageImpl();
-    _networkInfo = NetworkInfoImpl(_internetConnectionChecker);
-    _moviesRemoteDataSourceImpl = MoviesRemoteDataSourceImpl(dio: _dio);
-    _moviesRepositoryImpl = MoviesRepositoryImpl(
-        networkInfo: _networkInfo,
-        moviesLocalDataStorage: _moviesLocalDataStorage,
-        moviesRemoteDataSource: _moviesRemoteDataSourceImpl);
-    _moviesUseCases = MoviesUseCases(repository: _moviesRepositoryImpl);
+    dio = Dio();
+    internetConnectionChecker = InternetConnectionChecker();
+    moviesLocalDataStorage = MoviesLocalStorageImpl();
+    networkInfo = NetworkInfoImpl(internetConnectionChecker);
+    moviesRemoteDataSourceImpl = MoviesRemoteDataSourceImpl(dio: dio);
+    moviesRepositoryImpl = MoviesRepositoryImpl(
+        networkInfo: networkInfo,
+        moviesLocalDataStorage: moviesLocalDataStorage,
+        moviesRemoteDataSource: moviesRemoteDataSourceImpl);
+    moviesUseCases = MoviesUseCases(repository: moviesRepositoryImpl);
   });
 
   test("getMovies", () async {
-    final result = await _moviesUseCases?.getMovies();
+    final result = await moviesUseCases?.getMovies();
     expect(result, isA<MovieEntity>());
   });
 }

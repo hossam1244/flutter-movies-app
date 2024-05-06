@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
-import 'package:sample_movies_app_flutter/service_locator.dart' as serviceLocator;
+import 'package:sample_movies_app_flutter/service_locator.dart' as service_locator;
 
 import 'domain/entity/movie_results_entity.dart';
 import 'my_app.dart';
@@ -9,7 +9,7 @@ import 'my_app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initHive();
-  await serviceLocator.init();
+  await service_locator.init();
   runApp(const MyApp());
 }
 

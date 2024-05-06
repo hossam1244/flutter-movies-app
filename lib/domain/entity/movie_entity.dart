@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 
 import 'package:hive/hive.dart';
 
@@ -24,13 +23,12 @@ class MovieEntity extends HiveObject {
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(Results.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
 
-  @override
   List<Object?> get props => [page, results, totalPages, totalResults];
 }
