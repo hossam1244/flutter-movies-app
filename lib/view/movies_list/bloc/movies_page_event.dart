@@ -8,5 +8,6 @@ sealed class MoviesPageEvent extends Equatable {
 }
 
 final class FetchEvent extends MoviesPageEvent {
-  const FetchEvent();
+  final int pageKey;
+  const FetchEvent(this.pageKey);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sample_movies_app_flutter/domain/entity/movie_results_entity.dart';
 import 'package:sample_movies_app_flutter/service_locator.dart';
 
@@ -18,9 +19,16 @@ class MoviesListPage extends StatefulWidget {
 class _MoviesListPageState extends State<MoviesListPage> {
   late MoviesPageBloc _moviesPageBloc;
 
+  final PagingController<int, Results> _pagingController =
+      PagingController(firstPageKey: 1);
+
   @override
   void initState() {
     _initBloc();
+    //_fetchMovies();
+    _pagingController.addPageRequestListener((pageKey) {
+      _moviesPageBloc.add(FetchEvent(pageKey));
+    });
     super.initState();
   }
 
@@ -29,7 +37,13 @@ class _MoviesListPageState extends State<MoviesListPage> {
   }
 
   void _fetchMovies() {
-    _moviesPageBloc.add(const FetchEvent());
+    _moviesPageBloc.add(const FetchEvent(1));
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,21 +59,37 @@ class _MoviesListPageState extends State<MoviesListPage> {
   BlocProvider<MoviesPageBloc> buildBody(BuildContext context) {
     return BlocProvider(
       create: (_) => _moviesPageBloc,
-      child: BlocBuilder<MoviesPageBloc, MoviesPageState>(
+      child: BlocConsumer<MoviesPageBloc, MoviesPageState>(
+        listener: (BuildContext context, MoviesPageState state) {
+          if (state.status == MoviesPageStatus.success) {
+            final isLastPage = state.hasReachedEnd;
+            if (isLastPage) {
+              _pagingController.appendLastPage(state.movies?.results ?? []);
+            } else {
+              final nextPageKey = state.currentPage + 1;
+              _pagingController.appendPage(
+                state.movies?.results ?? [],
+                nextPageKey,
+              );
+            }
+          }
+        },
         builder: (context, state) {
-          if (state.status == MoviesPageStatus.initial) {
-            _fetchMovies();
-            return Container();
-          } else if (state.status == MoviesPageStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state.status == MoviesPageStatus.success) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.movies?.results?.length,
-              itemBuilder: (context, index) {
-                return InkWell(
+          return RefreshIndicator(
+            onRefresh: () => Future.sync(
+              () => _pagingController.refresh(),
+            ),
+            child: PagedListView<int, Results>.separated(
+              pagingController: _pagingController,
+              builderDelegate: PagedChildBuilderDelegate<Results>(
+                animateTransitions: true,
+                noItemsFoundIndicatorBuilder: (context) => const Center(
+                  child: Text('No movies found.'),
+                ),
+                firstPageProgressIndicatorBuilder: (context) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                itemBuilder: (context, item, index) => InkWell(
                   onTap: () {
                     Results? movieDetails = state.movies?.results?[index];
                     context.go('/movie_details', extra: movieDetails);
@@ -76,16 +106,11 @@ class _MoviesListPageState extends State<MoviesListPage> {
                       trailing: const Icon(Icons.star),
                     ),
                   ),
-                );
-              },
-            );
-          } else if (state.status == MoviesPageStatus.failure) {
-            return const Center(
-              child: Text("error..."),
-            );
-          } else {
-            return Container();
-          }
+                ),
+              ),
+              separatorBuilder: (context, index) => const Divider(),
+            ),
+          );
         },
       ),
     );

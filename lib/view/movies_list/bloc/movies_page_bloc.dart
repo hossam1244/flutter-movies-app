@@ -6,7 +6,6 @@ import '../../../domain/usecase/movies_use_cases.dart';
 import 'movies_page_event.dart';
 import 'movies_page_state.dart';
 
-
 class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
   final MoviesUseCases _moviesUseCases;
 
@@ -23,6 +22,11 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
     if (kDebugMode) {
       print(movies.results?.length);
     }
-    emit(MoviesPageState(status: MoviesPageStatus.success, movies: movies));
+    bool hasReachedEnd = movies.page == movies.totalPages;
+    emit(MoviesPageState(
+        status: MoviesPageStatus.success,
+        movies: movies,
+        hasReachedEnd: hasReachedEnd,
+        currentPage: movies.page ?? 1));
   }
 }
