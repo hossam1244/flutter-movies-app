@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildScreens() {
     return [
-      MoviesListPage(),
+      const MoviesListPage(),
       Container(color: Colors.yellow),
     ];
   }
