@@ -25,7 +25,6 @@ class _MoviesListPageState extends State<MoviesListPage> {
   @override
   void initState() {
     _initBloc();
-    //_fetchMovies();
     _pagingController.addPageRequestListener((pageKey) {
       _moviesPageBloc.add(FetchEvent(pageKey));
     });
@@ -36,9 +35,7 @@ class _MoviesListPageState extends State<MoviesListPage> {
     _moviesPageBloc = serviceLocator<MoviesPageBloc>();
   }
 
-  void _fetchMovies() {
-    _moviesPageBloc.add(const FetchEvent(1));
-  }
+
 
   @override
   void dispose() {
