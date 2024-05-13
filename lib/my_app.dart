@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sample_movies_app_flutter/view/home_page/home_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_list/movies_list_page.dart';
 
@@ -11,7 +12,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const MoviesListPage();
+        return const HomePage();
       },
       routes: <RouteBase>[
         GoRoute(
