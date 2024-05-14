@@ -11,7 +11,7 @@ class MoviesDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(movieDetails?.name ?? 'Movie Details'),
+        title: Text(movieDetails?.name ?? 'Movie Details Page'),
       ),
       body: Center(
         child: Padding(
