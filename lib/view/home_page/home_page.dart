@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:sample_movies_app_flutter/view/movies_list/movies_list_page.dart';
+import 'package:sample_movies_app_flutter/view/movies_list/movies_page.dart';
+
+import '../movies_list/bloc/movies_page_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   late PersistentTabController _controller;
 
   @override
@@ -19,9 +21,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  List<Widget> _buildScreens() {
+  List<Widget> _buildScreens(BuildContext context) {
     return [
-      const MoviesListPage(),
+      MoviesPage(),
       Container(color: Colors.yellow),
     ];
   }
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(),
+      screens: _buildScreens(context),
       items: _navBarsItems(),
       confineInSafeArea: true,
       backgroundColor: Colors.white,
@@ -67,17 +69,19 @@ class _HomePageState extends State<HomePage> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
+      itemAnimationProperties: ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
+      screenTransitionAnimation: ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle
-          .style1, // Choose the nav bar style with this property.
+      navBarStyle:
+          NavBarStyle.style1, // Choose the nav bar style with this property.
     );
   }
 }
