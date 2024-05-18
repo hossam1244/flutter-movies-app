@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_movies_app_flutter/view/favorites_page/favorites_view.dart';
 
-class FavoritesPage extends StatefulWidget {
+import 'favorites_cubit/favorites_cubit.dart';
+
+
+class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 
   @override
-  State<FavoritesPage> createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: BlocProvider(
+          create: (_) => FavoritesCubit(),
+          child: const FavoritesView(),
+        ),
+      ),
+    );
   }
 }
+
+

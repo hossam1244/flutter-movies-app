@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:sample_movies_app_flutter/view/movies_list/movies_page.dart';
+import '../favorites_page/favorites_page.dart';
+import '../movies_list/movies_page.dart';
 
-import '../movies_list/bloc/movies_page_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,8 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildScreens(BuildContext context) {
     return [
-      MoviesPage(),
-      Container(color: Colors.yellow),
+      const MoviesPage(),
+      const FavoritesPage(),
     ];
   }
 
