@@ -17,23 +17,18 @@ class MoviesView extends StatefulWidget {
 }
 
 class _MoviesViewState extends State<MoviesView> {
-  //late MoviesPageBloc _moviesPageBloc;
 
   final PagingController<int, Results> _pagingController =
       PagingController(firstPageKey: 1);
 
   @override
   void initState() {
-    _initBloc();
     _pagingController.addPageRequestListener((pageKey) {
       context.read<MoviesPageBloc>().add(FetchEvent(pageKey));
     });
     super.initState();
   }
 
-  void _initBloc() {
-    //_moviesPageBloc = serviceLocator<MoviesPageBloc>();
-  }
 
   @override
   void dispose() {
