@@ -5,11 +5,9 @@ import 'package:sample_movies_app_flutter/domain/repository/movies_repository_im
 
 import 'favorites_state.dart';
 
-/// {@template counter_cubit}
-/// A [Cubit] which manages an [int] as its state.
-/// {@endtemplate}
+// TODO get favorites from the repository
+// TODO remove a favorite from the repository
 class FavoritesCubit extends Cubit<FavoritesState> {
-  /// {@macro counter_cubit}
   FavoritesCubit() : super(const FavoritesState()) {
     getFavorites();
   }

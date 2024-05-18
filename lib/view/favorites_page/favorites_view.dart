@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_movies_app_flutter/view/favorites_page/favorites_cubit/favorites_cubit.dart';
 import 'package:sample_movies_app_flutter/view/favorites_page/favorites_cubit/favorites_state.dart';
 
+
+
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});
 

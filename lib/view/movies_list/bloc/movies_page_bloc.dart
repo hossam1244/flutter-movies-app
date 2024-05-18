@@ -6,6 +6,7 @@ import '../../../domain/usecase/movies_use_cases.dart';
 import 'movies_page_event.dart';
 import 'movies_page_state.dart';
 
+// TODO add favorite movies to the repository
 class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
   final MoviesUseCases _moviesUseCases;
 
