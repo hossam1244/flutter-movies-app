@@ -16,6 +16,7 @@ class MovieEntity extends HiveObject {
   @HiveField(3)
   int? totalResults;
 
+
   MovieEntity({this.page, this.results, this.totalPages, this.totalResults});
 
   MovieEntity.fromJson(Map<String, dynamic> json) {

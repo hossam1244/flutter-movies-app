@@ -14,6 +14,7 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
       : _moviesUseCases = moviesUseCases,
         super(const MoviesPageState()) {
     on<FetchEvent>(_onFetchMovies);
+    on<AddToFavoritesEvent>(_onAddToFavorites);
   }
 
   Future<void> _onFetchMovies(
@@ -29,5 +30,10 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
         movies: movies,
         hasReachedEnd: hasReachedEnd,
         currentPage: movies.page ?? 1));
+  }
+
+  Future<void> _onAddToFavorites(
+      AddToFavoritesEvent event, Emitter<MoviesPageState> emit) async {
+
   }
 }

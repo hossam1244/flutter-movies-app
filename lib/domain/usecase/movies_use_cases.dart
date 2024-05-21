@@ -12,4 +12,8 @@ class MoviesUseCases {
     final movies = await _repository.getMovies();
     return movies;
   }
+
+  Future<void> addToFavorites(int movieId) async {
+
+  }
 }

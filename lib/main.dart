@@ -26,5 +26,6 @@ Future<void> initHive() async {
   Hive.registerAdapter(ResultsAdapter());
   // Opening the box
   await Hive.openBox<MovieEntity>('moviesBox');
+  await Hive.openBox<MovieEntity>('favoriteMoviesBox');
 }
 

@@ -14,4 +14,14 @@ class MoviesLocalStorageImpl implements MoviesLocalDataSource {
   Future<void> saveMovies(MovieEntity movies) async {
     Hive.box<MovieEntity>('moviesBox').add(movies);
   }
+
+  @override
+  Future<void> addToFavorites(MovieEntity movieEntity) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeFromFavorites(MovieEntity movieEntity) {
+    throw UnimplementedError();
+  }
 }

@@ -19,7 +19,7 @@ class MoviesView extends StatefulWidget {
 class _MoviesViewState extends State<MoviesView> {
 
   final PagingController<int, Results> _pagingController =
-      PagingController(firstPageKey: 1);
+  PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -64,37 +64,43 @@ class _MoviesViewState extends State<MoviesView> {
       },
       builder: (context, state) {
         return RefreshIndicator(
-          onRefresh: () => Future.sync(
-            () => _pagingController.refresh(),
-          ),
+          onRefresh: () =>
+              Future.sync(
+                    () => _pagingController.refresh(),
+              ),
           child: PagedListView<int, Results>.separated(
             pagingController: _pagingController,
             builderDelegate: PagedChildBuilderDelegate<Results>(
               animateTransitions: true,
-              noItemsFoundIndicatorBuilder: (context) => const Center(
+              noItemsFoundIndicatorBuilder: (context) =>
+              const Center(
                 child: Text('No movies found.'),
               ),
-              firstPageProgressIndicatorBuilder: (context) => const Center(
+              firstPageProgressIndicatorBuilder: (context) =>
+              const Center(
                 child: CircularProgressIndicator(),
               ),
-              itemBuilder: (context, item, index) => InkWell(
-                onTap: () {
-                  Results? movieDetails = state.movies?.results?[index];
-                  context.go('/movie_details', extra: movieDetails);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListTile(
-                    title: Text(state.movies?.results?[index].name ?? ""),
-                    leading: Image.network(
-                      "https://image.tmdb.org/t/p/w500${state.movies?.results?[index].posterPath ?? ""}",
-                      width: 100,
-                      height: 100,
+              itemBuilder: (context, item, index) =>
+                  InkWell(
+                    onTap: () {
+                      Results? movieDetails = state.movies?.results?[index];
+                      context.go('/movie_details', extra: movieDetails);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ListTile(
+                        title: Text(state.movies?.results?[index].name ?? ""),
+                        leading: Image.network(
+                          "https://image.tmdb.org/t/p/w500${state.movies
+                              ?.results?[index].posterPath ?? ""}",
+                          width: 100,
+                          height: 100,
+                        ),
+                        trailing: (state.movies?.results?[index].isFavorite ??
+                            false) ? const Icon(Icons.star) : const Icon(Icons.star_border),
+                      ),
                     ),
-                    trailing: const Icon(Icons.star),
                   ),
-                ),
-              ),
             ),
             separatorBuilder: (context, index) => const Divider(),
           ),

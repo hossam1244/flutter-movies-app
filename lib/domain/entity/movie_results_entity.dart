@@ -34,6 +34,8 @@ class Results {
   double? voteAverage;
   @HiveField(13)
   int? voteCount;
+  @HiveField(14)
+  bool? isFavorite;
 
   Results(
       {this.adult,
