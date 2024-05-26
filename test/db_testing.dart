@@ -2,8 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
-import 'package:sample_movies_app_flutter/domain/entity/movie_results_entity.dart';
+import 'package:sample_movies_app_flutter/data/entities/movie_entity.dart';
+import 'package:sample_movies_app_flutter/data/entities/movie_results_entity.dart';
 
 void main() {
   setUp(() async {
@@ -27,7 +27,7 @@ void main() {
         return ".";
       });
       Hive.init((await getApplicationDocumentsDirectory()).path);
-      await Hive.openBox<MovieEntity>('moviesBox');
+      await Hive.openBox<MainMoviesEntity>('moviesBox');
       expect(Hive.isBoxOpen('moviesBox'), true);
     });
 
@@ -38,16 +38,16 @@ void main() {
 
     test("movies_db_open", () async {
       Hive.init((await getApplicationDocumentsDirectory()).path);
-      await Hive.openBox<MovieEntity>('moviesBox');
+      await Hive.openBox<MainMoviesEntity>('moviesBox');
       expect(Hive.isBoxOpen('moviesBox'), true);
     });
 
     test("add_movies", () {
-      final box = Hive.box<MovieEntity>('moviesBox');
-      final movie = MovieEntity(
+      final box = Hive.box<MainMoviesEntity>('moviesBox');
+      final movie = MainMoviesEntity(
           page: 1,
-          results: [
-            Results(
+          moviesList: [
+            MoviesList(
                 adult: false,
                 backdropPath: "/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg",
                 genreIds: [28, 12, 14],

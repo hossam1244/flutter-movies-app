@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../../domain/entity/movie_entity.dart';
+import '../../entities/movie_entity.dart';
 import 'movies_remote_data_source.dart';
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -8,7 +8,7 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   MoviesRemoteDataSourceImpl({required this.dio});
 
   @override
-  Future<MovieEntity> getMovies() async {
+  Future<MainMoviesEntity> getMovies() async {
     final response = await dio.get(
         'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc',
         options: Options(headers: {
@@ -17,7 +17,7 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
         }));
 
     if (response.statusCode == 200) {
-      MovieEntity movieEntity =  MovieEntity.fromJson(response.data);
+      MainMoviesEntity movieEntity =  MainMoviesEntity.fromJson(response.data);
       return movieEntity;
     } else {
       throw Exception('Failed to load movies');

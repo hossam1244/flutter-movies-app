@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
+import 'package:sample_movies_app_flutter/data/entities/movie_entity.dart';
 
 import '../../../domain/usecase/movies_use_cases.dart';
 import 'movies_page_event.dart';
@@ -20,9 +20,9 @@ class MoviesPageBloc extends Bloc<MoviesPageEvent, MoviesPageState> {
   Future<void> _onFetchMovies(
       FetchEvent event, Emitter<MoviesPageState> emit) async {
     emit(const MoviesPageState(status: MoviesPageStatus.loading));
-    MovieEntity movies = await _moviesUseCases.getMovies();
+    MainMoviesEntity movies = await _moviesUseCases.getMovies();
     if (kDebugMode) {
-      print(movies.results?.length);
+      print(movies.moviesList?.length);
     }
     bool hasReachedEnd = movies.page == movies.totalPages;
     emit(MoviesPageState(

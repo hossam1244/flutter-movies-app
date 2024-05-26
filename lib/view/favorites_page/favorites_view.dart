@@ -22,9 +22,9 @@ class FavoritesView extends StatelessWidget {
                 ? const CircularProgressIndicator()
                 : state.favorites != null
                     ? ListView.builder(
-                        itemCount: state.favorites!.results!.length,
+                        itemCount: state.favorites!.moviesList!.length,
                         itemBuilder: (context, index) {
-                          final movie = state.favorites!.results![index];
+                          final movie = state.favorites!.moviesList![index];
                           return ListTile(
                               leading: Image.network(
                                 'https://image.tmdb.org/t/p/w92${movie.posterPath}',

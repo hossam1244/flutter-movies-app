@@ -1,5 +1,5 @@
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository.dart';
-import '../entity/movie_entity.dart';
+import '../../data/entities/movie_entity.dart';
 
 class MoviesUseCases {
   MoviesUseCases({
@@ -8,7 +8,7 @@ class MoviesUseCases {
 
   final MoviesRepository _repository;
 
-  Future<MovieEntity> getMovies() async {
+  Future<MainMoviesEntity> getMovies() async {
     final movies = await _repository.getMovies();
     return movies;
   }

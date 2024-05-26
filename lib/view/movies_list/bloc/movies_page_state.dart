@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/entity/movie_entity.dart';
+import '../../../data/entities/movie_entity.dart';
 
 enum MoviesPageStatus { initial, loading, success, failure }
 
@@ -13,13 +13,13 @@ class MoviesPageState extends Equatable {
   });
 
   final MoviesPageStatus status;
-  final MovieEntity? movies;
+  final MainMoviesEntity? movies;
   final bool hasReachedEnd;
   final int currentPage;
 
   MoviesPageState copyWith({
     MoviesPageStatus? status,
-    MovieEntity? movies,
+    MainMoviesEntity? movies,
     bool? hasReachedEnd,
     int? currentPage,
   }) {
@@ -34,7 +34,7 @@ class MoviesPageState extends Equatable {
   @override
   List<Object> get props => [
     status,
-    movies ?? MovieEntity(),
+    movies ?? MainMoviesEntity(),
     hasReachedEnd,
     currentPage,
   ];

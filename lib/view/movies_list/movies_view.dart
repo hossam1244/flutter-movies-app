@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:sample_movies_app_flutter/domain/entity/movie_results_entity.dart';
-import 'package:sample_movies_app_flutter/service_locator.dart';
+import 'package:sample_movies_app_flutter/data/entities/movie_results_entity.dart';
 
 import 'bloc/movies_page_bloc.dart';
 import 'bloc/movies_page_event.dart';
@@ -18,7 +18,7 @@ class MoviesView extends StatefulWidget {
 
 class _MoviesViewState extends State<MoviesView> {
 
-  final PagingController<int, Results> _pagingController =
+  final PagingController<int, MoviesList> _pagingController =
   PagingController(firstPageKey: 1);
 
   @override
@@ -52,11 +52,11 @@ class _MoviesViewState extends State<MoviesView> {
         if (state.status == MoviesPageStatus.success) {
           final isLastPage = state.hasReachedEnd;
           if (isLastPage) {
-            _pagingController.appendLastPage(state.movies?.results ?? []);
+            _pagingController.appendLastPage(state.movies?.moviesList ?? []);
           } else {
             final nextPageKey = state.currentPage + 1;
             _pagingController.appendPage(
-              state.movies?.results ?? [],
+              state.movies?.moviesList ?? [],
               nextPageKey,
             );
           }
@@ -68,9 +68,9 @@ class _MoviesViewState extends State<MoviesView> {
               Future.sync(
                     () => _pagingController.refresh(),
               ),
-          child: PagedListView<int, Results>.separated(
+          child: PagedListView<int, MoviesList>.separated(
             pagingController: _pagingController,
-            builderDelegate: PagedChildBuilderDelegate<Results>(
+            builderDelegate: PagedChildBuilderDelegate<MoviesList>(
               animateTransitions: true,
               noItemsFoundIndicatorBuilder: (context) =>
               const Center(
@@ -83,21 +83,24 @@ class _MoviesViewState extends State<MoviesView> {
               itemBuilder: (context, item, index) =>
                   InkWell(
                     onTap: () {
-                      Results? movieDetails = state.movies?.results?[index];
+                      MoviesList? movieDetails = state.movies?.moviesList?[index];
                       context.go('/movie_details', extra: movieDetails);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListTile(
-                        title: Text(state.movies?.results?[index].name ?? ""),
+                        title: Text(state.movies?.moviesList?[index].name ?? ""),
                         leading: Image.network(
                           "https://image.tmdb.org/t/p/w500${state.movies
-                              ?.results?[index].posterPath ?? ""}",
+                              ?.moviesList?[index].posterPath ?? ""}",
                           width: 100,
                           height: 100,
                         ),
-                        trailing: (state.movies?.results?[index].isFavorite ??
-                            false) ? const Icon(Icons.star) : const Icon(Icons.star_border),
+                        trailing: (state.movies?.moviesList?[index].isFavorite ??
+                            false) ? InkWell(
+                              onTap: () {
+                              },
+                              child: const Icon(Icons.star)) : const Icon(Icons.star_border),
                       ),
                     ),
                   ),

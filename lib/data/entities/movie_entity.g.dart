@@ -6,32 +6,32 @@ part of 'movie_entity.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MovieEntityAdapter extends TypeAdapter<MovieEntity> {
+class MainMoviesEntityAdapter extends TypeAdapter<MainMoviesEntity> {
   @override
   final int typeId = 1;
 
   @override
-  MovieEntity read(BinaryReader reader) {
+  MainMoviesEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return MovieEntity(
+    return MainMoviesEntity(
       page: fields[0] as int?,
-      results: (fields[1] as List?)?.cast<Results>(),
+      moviesList: (fields[1] as List?)?.cast<MoviesList>(),
       totalPages: fields[2] as int?,
       totalResults: fields[3] as int?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, MovieEntity obj) {
+  void write(BinaryWriter writer, MainMoviesEntity obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
       ..write(obj.page)
       ..writeByte(1)
-      ..write(obj.results)
+      ..write(obj.moviesList)
       ..writeByte(2)
       ..write(obj.totalPages)
       ..writeByte(3)
@@ -44,7 +44,7 @@ class MovieEntityAdapter extends TypeAdapter<MovieEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MovieEntityAdapter &&
+      other is MainMoviesEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

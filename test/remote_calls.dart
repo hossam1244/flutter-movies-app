@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sample_movies_app_flutter/core/network_info.dart';
-import 'package:sample_movies_app_flutter/data/local/movies_local_storage_impl.dart';
-import 'package:sample_movies_app_flutter/data/local/movies_local_storage_source.dart';
-import 'package:sample_movies_app_flutter/data/network/movies_remote_data_source_impl.dart';
-import 'package:sample_movies_app_flutter/domain/entity/movie_entity.dart';
-import 'package:sample_movies_app_flutter/domain/repository/movies_repository_impl.dart';
+import 'package:sample_movies_app_flutter/data/datasource/local/movies_local_storage_impl.dart';
+import 'package:sample_movies_app_flutter/data/datasource/local/movies_local_storage_source.dart';
+import 'package:sample_movies_app_flutter/data/datasource/network/movies_remote_data_source_impl.dart';
+import 'package:sample_movies_app_flutter/data/entities/movie_entity.dart';
+import 'package:sample_movies_app_flutter/data/repository/movies_repository_impl.dart';
 import 'package:sample_movies_app_flutter/domain/usecase/movies_use_cases.dart';
 
 void main() {
@@ -33,6 +33,6 @@ void main() {
 
   test("getMovies", () async {
     final result = await moviesUseCases?.getMovies();
-    expect(result, isA<MovieEntity>());
+    expect(result, isA<MainMoviesEntity>());
   });
 }

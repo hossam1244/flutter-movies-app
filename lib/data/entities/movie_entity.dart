@@ -6,30 +6,30 @@ import 'movie_results_entity.dart';
 part 'movie_entity.g.dart';
 
 @HiveType(typeId: 1)
-class MovieEntity extends HiveObject {
+class MainMoviesEntity extends HiveObject {
   @HiveField(0)
   int? page;
   @HiveField(1)
-  List<Results>? results;
+  List<MoviesList>? moviesList;
   @HiveField(2)
   int? totalPages;
   @HiveField(3)
   int? totalResults;
 
 
-  MovieEntity({this.page, this.results, this.totalPages, this.totalResults});
+  MainMoviesEntity({this.page, this.moviesList, this.totalPages, this.totalResults});
 
-  MovieEntity.fromJson(Map<String, dynamic> json) {
+  MainMoviesEntity.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
-      results = <Results>[];
+      moviesList = <MoviesList>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        moviesList!.add(MoviesList.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
 
-  List<Object?> get props => [page, results, totalPages, totalResults];
+  List<Object?> get props => [page, moviesList, totalPages, totalResults];
 }

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_movies_app_flutter/view/home_page/home_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
-import 'package:sample_movies_app_flutter/view/movies_list/movies_page.dart';
 
-import 'domain/entity/movie_results_entity.dart';
+import 'data/entities/movie_results_entity.dart';
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
@@ -18,7 +17,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'movie_details',
           builder: (BuildContext context, GoRouterState state) {
-            Results? movieDetails = state.extra as Results;
+            MoviesList? movieDetails = state.extra as MoviesList;
             return MoviesDetailsPage(
               movieDetails: movieDetails,
             );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entity/movie_results_entity.dart';
+import '../../data/entities/movie_results_entity.dart';
 
 class MoviesDetailsPage extends StatelessWidget {
-  final Results? movieDetails;
+  final MoviesList? movieDetails;
 
   const MoviesDetailsPage({super.key, required this.movieDetails});
 

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sample_movies_app_flutter/domain/repository/movies_repository.dart';
-import 'package:sample_movies_app_flutter/domain/repository/movies_repository_impl.dart';
+import 'package:sample_movies_app_flutter/data/repository/movies_repository_impl.dart';
 
 import 'favorites_state.dart';
 

@@ -6,17 +6,17 @@ part of 'movie_results_entity.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ResultsAdapter extends TypeAdapter<Results> {
+class MoviesListAdapter extends TypeAdapter<MoviesList> {
   @override
   final int typeId = 2;
 
   @override
-  Results read(BinaryReader reader) {
+  MoviesList read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Results(
+    return MoviesList(
       adult: fields[0] as bool?,
       backdropPath: fields[1] as String?,
       genreIds: (fields[2] as List?)?.cast<int>(),
@@ -31,13 +31,13 @@ class ResultsAdapter extends TypeAdapter<Results> {
       name: fields[11] as String?,
       voteAverage: fields[12] as double?,
       voteCount: fields[13] as int?,
-    );
+    )..isFavorite = fields[14] as bool?;
   }
 
   @override
-  void write(BinaryWriter writer, Results obj) {
+  void write(BinaryWriter writer, MoviesList obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.adult)
       ..writeByte(1)
@@ -65,7 +65,9 @@ class ResultsAdapter extends TypeAdapter<Results> {
       ..writeByte(12)
       ..write(obj.voteAverage)
       ..writeByte(13)
-      ..write(obj.voteCount);
+      ..write(obj.voteCount)
+      ..writeByte(14)
+      ..write(obj.isFavorite);
   }
 
   @override
@@ -74,7 +76,7 @@ class ResultsAdapter extends TypeAdapter<Results> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ResultsAdapter &&
+      other is MoviesListAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

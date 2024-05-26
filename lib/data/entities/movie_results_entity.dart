@@ -5,7 +5,7 @@ part 'movie_results_entity.g.dart';
 
 
 @HiveType(typeId: 2)
-class Results {
+class MoviesList {
   @HiveField(0)
   bool? adult;
   @HiveField(1)
@@ -37,7 +37,7 @@ class Results {
   @HiveField(14)
   bool? isFavorite;
 
-  Results(
+  MoviesList(
       {this.adult,
         this.backdropPath,
         this.genreIds,
@@ -53,7 +53,7 @@ class Results {
         this.voteAverage,
         this.voteCount});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  MoviesList.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
