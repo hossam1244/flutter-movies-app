@@ -32,7 +32,7 @@ class FavoritesView extends StatelessWidget {
                               ),
                               title: Text(
                                 movie.name ?? '',
-                                style: textTheme.headline6,
+                                style: textTheme.titleLarge,
                               ),
                               subtitle: Text(
                                 movie.overview ?? '',
