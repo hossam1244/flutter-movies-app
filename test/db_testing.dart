@@ -9,8 +9,8 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     if (Hive.isAdapterRegistered(1) == false) {
-      Hive.registerAdapter(MovieEntityAdapter());
-      Hive.registerAdapter(ResultsAdapter());
+      Hive.registerAdapter(MainMoviesEntityAdapter());
+      Hive.registerAdapter(MoviesListAdapter());
     }
   });
 
