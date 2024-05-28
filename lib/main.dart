@@ -26,6 +26,7 @@ Future<void> initHive() async {
   Hive.registerAdapter(MoviesListAdapter());
   // Opening the box
   await Hive.openBox<MainMoviesEntity>('moviesBox');
-  
+
+  // TODO create a box for saving favorites movies
 }
 
