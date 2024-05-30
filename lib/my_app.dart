@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_movies_app_flutter/view/home_page/home_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
-
 import 'data/entities/movie_results_entity.dart';
 
 /// The route configuration.
