@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sample_movies_app_flutter/data/entities/movie_results_entity.dart';
 
+import '../movies_details/movie_details_page.dart';
 import 'bloc/movies_page_bloc.dart';
 import 'bloc/movies_page_event.dart';
 import 'bloc/movies_page_state.dart';
@@ -83,7 +85,10 @@ class _MoviesViewState extends State<MoviesView> {
                   InkWell(
                     onTap: () {
                       MoviesList? movieDetails = state.movies?.moviesList?[index];
-                      context.go('/movie_details', extra: movieDetails);
+                      // this is with go router
+                      //context.go('/movie_details', extra: movieDetails);
+                      // and this with getX
+                      Get.to(() => MoviesDetailsPage(movieDetails: movieDetails));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
