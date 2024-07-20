@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import '../favorites_page/favorites_page.dart';
 import '../movies_list/movies_page.dart';
 
@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
       controller: _controller,
       screens: _buildScreens(context),
       items: _navBarsItems(),
-      confineInSafeArea: true,
       backgroundColor: Colors.white,
       // Default is Colors.white.
       handleAndroidBackButtonPress: true,
@@ -58,25 +57,9 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: true,
       // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true,
-      // Default is true.
-      hideNavigationBarWhenKeyboardShows: true,
-      // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
         colorBehindNavBar: Colors.white,
-      ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
           NavBarStyle.style1, // Choose the nav bar style with this property.

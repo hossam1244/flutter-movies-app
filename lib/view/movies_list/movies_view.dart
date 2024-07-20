@@ -28,8 +28,6 @@ class _MoviesViewState extends State<MoviesView> {
       context.read<MoviesPageBloc>().add(FetchEvent(pageKey));
     });
     super.initState();
-    Alerts.showAlertDialog("Show alert!", "This is alert without passing context!!");
-
   }
 
   @override
@@ -91,9 +89,9 @@ class _MoviesViewState extends State<MoviesView> {
                 onTap: () {
                   MoviesList? movieDetails = state.movies?.moviesList?[index];
                   // this is with go router
-                  //context.go('/movie_details', extra: movieDetails);
+                  context.go('/movie_details', extra: movieDetails);
                   // and this with getX
-                  Get.to(() => MoviesDetailsPage(movieDetails: movieDetails));
+                  //Get.to(() => MoviesDetailsPage(movieDetails: movieDetails));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
