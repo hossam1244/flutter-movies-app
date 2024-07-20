@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:sample_movies_app_flutter/utils/app_localizations.dart';
+import 'package:sample_movies_app_flutter/utils/localized_build_context.dart';
 import '../favorites_page/favorites_page.dart';
 import '../movies_list/movies_page.dart';
 
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home),
-        title: ("Home"),
+        title: (context.loc.home),
         activeColorPrimary: Colors.red,
         inactiveColorPrimary: Colors.grey,
       ),
