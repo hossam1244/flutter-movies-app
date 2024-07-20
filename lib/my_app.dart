@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_movies_app_flutter/view/home_page/home_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
@@ -33,13 +34,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
+      navigatorKey: Get.key,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      routerConfig: _router,
+      home: const HomePage(),
     );
   }
 }

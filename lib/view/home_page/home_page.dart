@@ -12,11 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late PersistentTabController _controller;
+  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
   void initState() {
-    _controller = PersistentTabController(initialIndex: 0);
     super.initState();
   }
 
