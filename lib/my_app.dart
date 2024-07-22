@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_movies_app_flutter/view/home_page/home_page.dart';
 import 'package:sample_movies_app_flutter/view/movies_details/movie_details_page.dart';
-import 'package:sample_movies_app_flutter/view/movies_list/movies_page.dart';
 import 'data/entities/movie_results_entity.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
