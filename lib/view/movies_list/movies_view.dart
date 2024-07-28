@@ -18,9 +18,27 @@ class MoviesView extends StatefulWidget {
   State<MoviesView> createState() => _MoviesViewState();
 }
 
-class _MoviesViewState extends State<MoviesView> {
+class _MoviesViewState extends State<MoviesView> with WidgetsBindingObserver {
   final PagingController<int, MoviesList>? _pagingController =
       PagingController(firstPageKey: 1);
+
+  bool _inForeground = true;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _inForeground = true;
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        _inForeground = false;
+        break;
+      case AppLifecycleState.hidden:
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -28,11 +46,13 @@ class _MoviesViewState extends State<MoviesView> {
       context.read<MoviesPageBloc>().add(FetchEvent(pageKey));
     });
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
   void dispose() {
     _pagingController?.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 

@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sample_movies_app_flutter/view/movies_list/bloc/movies_page_bloc.dart';
 import 'package:sample_movies_app_flutter/view/movies_list/movies_view.dart';
 
-class MoviesPage extends StatelessWidget {
+class MoviesPage extends StatelessWidget  {
   const MoviesPage({super.key});
 
   @override
